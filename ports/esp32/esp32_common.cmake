@@ -113,8 +113,18 @@ list(APPEND MICROPY_SOURCE_PORT
     main.c
     ppp_set_auth.c
     uart.c
-    usb.c
-    usb_serial_jtag.c
+    usb
+    esp_http_client
+    esp_http_server
+    esp-tls
+    tcp_transport
+    http_parser.c
+    usb
+    esp_http_client
+    esp_http_server
+    esp-tls
+    tcp_transport
+    http_parser_serial_jtag.c
     gccollect.c
     mphalport.c
     fatfs_port.c
@@ -194,6 +204,11 @@ list(APPEND IDF_COMPONENTS
     spi_flash
     ulp
     usb
+    esp_http_client
+    esp_http_server
+    esp-tls
+    tcp_transport
+    http_parser
     vfs
 )
 
