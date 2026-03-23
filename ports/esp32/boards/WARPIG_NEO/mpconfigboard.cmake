@@ -1,0 +1,15 @@
+set(IDF_TARGET esp32s3)
+
+set(SDKCONFIG_DEFAULTS
+    boards/sdkconfig.base
+    boards/sdkconfig.ble
+    boards/sdkconfig.240mhz
+    boards/sdkconfig.spiram_sx
+    boards/WARPIG_NEO/sdkconfig.board
+)
+
+set(USER_C_MODULES
+    ${MICROPY_BOARD_DIR}/../WARPIG_PROS3/cmodules/micropython.cmake
+)
+
+set(MICROPY_FROZEN_MANIFEST ${MICROPY_BOARD_DIR}/manifest.py)

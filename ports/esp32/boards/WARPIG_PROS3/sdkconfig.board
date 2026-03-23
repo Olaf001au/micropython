@@ -1,0 +1,82 @@
+# WarpPig ProS3 — AI + RTOS build
+CONFIG_ESPTOOLPY_FLASHMODE_QIO=y
+CONFIG_ESPTOOLPY_FLASHFREQ_80M=y
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+
+# Custom partition table (4MB app + 12MB VFS)
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="boards/WARPIG_PROS3/partitions-16MiB.csv"
+
+# PSRAM (ProS3 has 8MB OPI PSRAM)
+CONFIG_SPIRAM_MEMTEST=
+
+# Hostname
+CONFIG_LWIP_LOCAL_HOSTNAME="warpig-ai"
+
+# Enable ESP-IDF HTTP client (for LLM API calls with SSE streaming)
+CONFIG_ESP_HTTP_CLIENT_ENABLE_HTTPS=y
+CONFIG_ESP_HTTP_CLIENT_ENABLE_BASIC_AUTH=y
+
+# TLS certificate bundle (needed for HTTPS to public APIs)
+CONFIG_MBEDTLS_CERTIFICATE_BUNDLE=y
+CONFIG_MBEDTLS_CERTIFICATE_BUNDLE_DEFAULT_FULL=y
+
+# ALPN (required by esp_http_client SSL transport)
+CONFIG_MBEDTLS_SSL_ALPN=y
+
+# TLS 1.3 support
+CONFIG_MBEDTLS_SSL_PROTO_TLS1_3=y
+
+# Session tickets (faster TLS reconnects)
+CONFIG_ESP_TLS_CLIENT_SESSION_TICKETS=y
+CONFIG_MBEDTLS_CLIENT_SSL_SESSION_TICKETS=y
+
+# SNI (Server Name Indication)
+CONFIG_MBEDTLS_SSL_SERVER_NAME_INDICATION=y
+
+# Enable ESP-IDF HTTP server (native HTTPD)
+CONFIG_HTTPD_MAX_REQ_HDR_LEN=1024
+CONFIG_HTTPD_MAX_URI_LEN=512
+
+# FreeRTOS trace facility (exposes task stats to Python)
+CONFIG_FREERTOS_USE_TRACE_FACILITY=y
+CONFIG_FREERTOS_GENERATE_RUN_TIME_STATS=y
+
+# Larger task stack for AI workloads
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=16384
+
+# Enable mDNS
+CONFIG_MDNS_MAX_SERVICES=10
+
+# ── Performance Optimizations ────────────────────────────────────────────────
+
+# LTO (Link Time Optimization) — optimizes across all object files
+CONFIG_COMPILER_OPTIMIZATION_PERF=y
+CONFIG_COMPILER_OPTIMIZATION_ASSERTIONS_DISABLE=y
+CONFIG_LTO_ENABLED=y
+
+# PSRAM cache — maximize cache line usage for PSRAM access
+CONFIG_SPIRAM_FETCH_INSTRUCTIONS=y
+CONFIG_SPIRAM_RODATA=y
+
+# Flash cache — bigger cache = fewer flash reads
+CONFIG_ESP32S3_DATA_CACHE_64KB=y
+CONFIG_ESP32S3_DATA_CACHE_LINE_64B=y
+CONFIG_ESP32S3_INSTRUCTION_CACHE_32KB=y
+
+# CPU — maximize performance
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_240=y
+
+# FreeRTOS — optimize tick rate for better timing resolution
+CONFIG_FREERTOS_HZ=1000
+
+# LWIP performance
+CONFIG_LWIP_IRAM_OPTIMIZATION=y
+CONFIG_LWIP_TCP_SND_BUF_DEFAULT=5744
+CONFIG_LWIP_TCP_WND_DEFAULT=5744
+
+# ── Compressed Storage ───────────────────────────────────────────────────────
+
+# Use LittleFS instead of FAT — better wear leveling, smaller overhead
+# (FAT is default, but LittleFS is more efficient for small files)
+# Note: MicroPython supports both VFS_FAT and VFS_LFS2
