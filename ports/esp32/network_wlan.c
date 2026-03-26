@@ -43,6 +43,10 @@
 #include "esp_log.h"
 #include "esp_psram.h"
 
+#if MICROPY_PY_NETWORK_WLAN_CSI
+#include "modwifi_csi.h"
+#endif
+
 #ifndef NO_QSTR
 #include "mdns.h"
 #endif
@@ -786,6 +790,15 @@ static const mp_rom_map_elem_t wlan_if_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_PM_NONE), MP_ROM_INT(WIFI_PS_NONE) },
     { MP_ROM_QSTR(MP_QSTR_PM_PERFORMANCE), MP_ROM_INT(WIFI_PS_MIN_MODEM) },
     { MP_ROM_QSTR(MP_QSTR_PM_POWERSAVE), MP_ROM_INT(WIFI_PS_MAX_MODEM) },
+
+    #if MICROPY_PY_NETWORK_WLAN_CSI
+    { MP_ROM_QSTR(MP_QSTR_csi_enable), MP_ROM_PTR(&network_wlan_csi_enable_obj) },
+    { MP_ROM_QSTR(MP_QSTR_csi_disable), MP_ROM_PTR(&network_wlan_csi_disable_obj) },
+    { MP_ROM_QSTR(MP_QSTR_csi_read), MP_ROM_PTR(&network_wlan_csi_read_obj) },
+    { MP_ROM_QSTR(MP_QSTR_csi_dropped), MP_ROM_PTR(&network_wlan_csi_dropped_obj) },
+    { MP_ROM_QSTR(MP_QSTR_csi_force_gain), MP_ROM_PTR(&network_wlan_csi_force_gain_obj) },
+    { MP_ROM_QSTR(MP_QSTR_csi_gain_lock_supported), MP_ROM_PTR(&network_wlan_csi_gain_lock_supported_obj) },
+    #endif
 };
 static MP_DEFINE_CONST_DICT(wlan_if_locals_dict, wlan_if_locals_dict_table);
 

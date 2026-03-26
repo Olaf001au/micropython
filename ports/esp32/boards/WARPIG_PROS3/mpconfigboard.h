@@ -80,6 +80,10 @@
 // ── Enable UART REPL on USB-OTG ────────────────────────────────────────────
 #define MICROPY_HW_ENABLE_UART_REPL         (0)  // USB CDC, not UART
 
+// ── WiFi CSI (Channel State Information) for human detection ────────────────
+#define MICROPY_PY_NETWORK_WLAN_CSI         (1)
+#define MICROPY_PY_NETWORK_WLAN_CSI_DEFAULT_BUFFER_SIZE (8)  // frames in ring buffer
+
 // ── Profiling: sys.settrace support ─────────────────────────────────────────
 #define MICROPY_PY_SYS_SETTRACE             (1)   // enable function-level tracing
 #define MICROPY_COMP_CONST_FOLDING          (1)   // fold constants at compile time

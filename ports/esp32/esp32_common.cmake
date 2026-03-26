@@ -113,18 +113,8 @@ list(APPEND MICROPY_SOURCE_PORT
     main.c
     ppp_set_auth.c
     uart.c
-    usb
-    esp_http_client
-    esp_http_server
-    esp-tls
-    tcp_transport
-    http_parser.c
-    usb
-    esp_http_client
-    esp_http_server
-    esp-tls
-    tcp_transport
-    http_parser_serial_jtag.c
+    usb.c
+    usb_serial_jtag.c
     gccollect.c
     mphalport.c
     fatfs_port.c
@@ -139,6 +129,7 @@ list(APPEND MICROPY_SOURCE_PORT
     network_lan.c
     network_ppp.c
     network_wlan.c
+    modwifi_csi.c
     mpnimbleport.c
     modsocket.c
     lwip_patch.c
@@ -204,12 +195,13 @@ list(APPEND IDF_COMPONENTS
     spi_flash
     ulp
     usb
+    vfs
     esp_http_client
     esp_http_server
     esp-tls
     tcp_transport
     http_parser
-    vfs
+    esp-dsp
 )
 
 if($ENV{IDF_VERSION} VERSION_GREATER_EQUAL "5.4")
