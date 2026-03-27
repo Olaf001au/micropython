@@ -1,0 +1,4 @@
+# WarpPig Nesso — Arduino Nesso N1 (ESP32-C6)
+# 16MB flash, no PSRAM
+
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
