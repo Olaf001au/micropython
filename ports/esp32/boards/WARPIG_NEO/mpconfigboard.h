@@ -53,5 +53,9 @@
 #define MICROPY_PY_SYS_SETTRACE             (1)
 #define MICROPY_COMP_CONST_FOLDING          (1)
 
+// WiFi CSI (Channel State Information) for human detection
+#define MICROPY_PY_NETWORK_WLAN_CSI         (1)
+#define MICROPY_PY_NETWORK_WLAN_CSI_DEFAULT_BUFFER_SIZE (8)
+
 // UART REPL on USB-Serial/JTAG (Neo uses this, not USB-OTG)
 #define MICROPY_HW_ENABLE_UART_REPL         (1)

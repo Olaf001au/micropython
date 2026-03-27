@@ -5,6 +5,7 @@ set(SDKCONFIG_DEFAULTS
     boards/sdkconfig.ble
     boards/sdkconfig.240mhz
     boards/sdkconfig.spiram_sx
+    boards/sdkconfig.csi
     boards/WARPIG_NEO/sdkconfig.board
 )
 

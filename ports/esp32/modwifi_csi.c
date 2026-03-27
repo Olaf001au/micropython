@@ -75,8 +75,10 @@ typedef struct {
 static const char *TAG = "wifi_csi";
 
 // Global CSI state (static - only used within this file)
-// C99 mandates all static structure fields to be initialized with 0/NULL unless specified otherwise
-static csi_state_t g_csi_state = {};
+// htltf_en=1 required: at least one LTF must be enabled for CSI to work on ESP32/S2/S3/C3
+static csi_state_t g_csi_state = {
+    .config = { .htltf_en = 1 },
+};
 
 // ============================================================================
 // CSI Callback (ISR Context)
